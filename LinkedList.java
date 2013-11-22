@@ -59,4 +59,5 @@ public class LinkedList
     current = current.getPrevious();   // Get the reference to the previous item.
     return current == null ? null : current.getObject();
   }
+  
 }
