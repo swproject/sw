@@ -1,3 +1,5 @@
+
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -33,6 +35,10 @@ private class LinkedListIterator implements Iterator<Object>
 }
    
 }
+public LinkedList()
+{
+    
+}
 public Iterator<Object> iterator()
 {
    return new LinkedListIterator();
@@ -41,10 +47,7 @@ public void addFirst(Object item)
 {
    head = new Node<Object>(item, head);
 }
-public Node<Object> getHead()
-{
-    return head;
-}
+
 public void addLast(Object item)
 {
    if(head == null) addFirst(item);
@@ -108,5 +111,25 @@ public void remove(Object key)
    //delete cur node
    prev.next = cur.next;
 }
-
+public Node<Object> getHead()
+{
+    return head;
+}
+public Object getObj(Node<Object> input)
+{
+    return input.data;
+}
+ public static void main(String[] args) throws IOException {
+    LinkedList<Integer> ls = new LinkedList<Integer>();
+    ls.addFirst(1);
+    ls.remove(1);
+    Node h = ls.getHead();
+    if(ls.getObj(h) == null)
+        System.out.println("NULL!!!");
+    else
+    {
+        int ele = ls.getObj(h);
+        System.out.println("ele: " + ele);
+    }
+ }
 }
