@@ -59,6 +59,7 @@ public void addLast(Object item)
       tmp.next = new Node<Object>(item, null);
    }
 }
+/*Insert toInsert object after the node that contains "key" object*/
 public void insertAfter(Object key, Object toInsert)
 {
    Node<Object> tmp = head;
@@ -67,6 +68,7 @@ public void insertAfter(Object key, Object toInsert)
    if(tmp != null)
       tmp.next = new Node<Object>(toInsert, tmp.next);
 }
+/*Insert toInsert object before the node that contains "key" object*/
 public void insertBefore(Object key, Object toInsert)
 {
    if(head == null) return;
@@ -87,6 +89,7 @@ public void insertBefore(Object key, Object toInsert)
    //insert between cur and prev
    if(cur != null) prev.next = new Node<Object>(toInsert, cur);
 }
+/*This function removes a datum from the list. Input a datum you like to remove*/
 public void remove(Object key)
 {
    if(head == null) throw new RuntimeException("cannot delete");
@@ -111,19 +114,73 @@ public void remove(Object key)
    //delete cur node
    prev.next = cur.next;
 }
+/*Get head pointer from the list*/
 public Node<Object> getHead()
 {
     return head;
 }
+/*Get the data from the object you like*/
 public Object getObj(Node<Object> input)
 {
     return input.data;
 }
+/*Lets check whether we removed the data from the list*/
+/*Input the object that you wanted to delete*/
+public boolean isRemoved(Object key)
+{
+    if(head == null) throw new RuntimeException("everything is gone");
+     System.out.println("");
+      System.out.println("");
+    System.out.println("Is " + key.toString()+ " still in the list??? ");
+    System.out.println("");
+      System.out.println("");
+   if( head.data.equals(key) )
+   {
+      head = head.next;
+       System.out.println("");
+      System.out.println("");
+       System.out.println("Answer is: No");
+       System.out.println("");
+      System.out.println("");
+      return false;
+   }
+
+   Node<Object> cur  = head;
+   Node<Object> prev = null;
+
+   while(cur != null && !cur.data.equals(key) )
+   {
+      prev = cur;
+      cur = cur.next;
+   }
+
+   if(cur == null)
+   {
+       System.out.println("");
+      System.out.println("");
+       System.out.println("Answer is: Yes");
+       System.out.println("");
+      System.out.println("");
+       return true;
+   }
+   else
+   {
+       System.out.println("");
+      System.out.println("");
+       System.out.println("Answer is: No");
+       System.out.println("");
+      System.out.println("");
+       return false;
+   }
+  }
  public static void main(String[] args) throws IOException {
     LinkedList<Integer> ls = new LinkedList<Integer>();
     ls.addFirst(1);
+    ls.addLast(2);
     ls.remove(1);
     Node h = ls.getHead();
+    boolean isRemoved = ls.isRemoved(2);
+    System.out.println("isRemoved: " + isRemoved);
     if(ls.getObj(h) == null)
         System.out.println("NULL!!!");
     else
