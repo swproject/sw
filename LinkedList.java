@@ -1,4 +1,3 @@
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -42,7 +41,10 @@ public void addFirst(Object item)
 {
    head = new Node<Object>(item, head);
 }
-
+public Node<Object> getHead()
+{
+    return head;
+}
 public void addLast(Object item)
 {
    if(head == null) addFirst(item);
