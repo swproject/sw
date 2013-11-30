@@ -5,11 +5,67 @@ import java.util.LinkedList;
 public class Payroll {
 
 	
+	private class Employee {
+		
+		private int m_id;
+		private String m_name;
+		private int m_salary;
+		
+		private Employee(int m_id, String m_name, int m_salary) {
+			super();
+			this.m_id = m_id;
+			this.m_name = m_name;
+			this.m_salary = m_salary;
+		}
+
+		public int get_id() {
+			return m_id;
+		}
+
+		public String get_name() {
+			return m_name;
+		}
+
+		public int get_salary() {
+			return m_salary;
+		}
+		
+		private void modify_salary(int percentage)
+		{
+			m_salary = m_salary + m_salary * percentage / 100 ;
+		}
+		
+		
+
+	}
+	
+	
 	private LinkedList<Employee> m_employees;
 	
-	public LinkedList<Employee> get_employees() {
-		return m_employees;
+	public Payroll() {
+		m_employees = new LinkedList<Employee>();
 	}
+	
+	public String get_employee_name(int ID) {
+		   for(Employee e : m_employees)
+	        {
+	        	if(e.get_id() == ID)
+	        		return e.get_name();
+	        }
+		   return null;
+	}
+
+	public int get_employee_salary(int ID) {
+		   for(Employee e : m_employees)
+	        {
+	        	if(e.get_id() == ID)
+	        		return e.get_salary();
+	        }
+		   return -1;
+	}
+	
+	
+
 
 	public void addEmployee(int ID, String name, int salary)
 	{
@@ -36,13 +92,14 @@ public class Payroll {
 	}
 
 	private LinkedList<SalaryRaise> get_raises_from_somewhere() {
-		// TODO Auto-generated method stub
+		//Would get a real list from an object
 		return null;
 	}
 	
 	// Better desing for a good unit testing
-	public void raise_employees_betterDesign(LinkedList<SalaryRaise> raises)
+	public void raise_employees_betterDesign(EmployeesRaises all_raises)
 	{		
+		LinkedList<SalaryRaise> raises = all_raises.getRaisesList();
 		if (raises == null)
 			return;
 			
