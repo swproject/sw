@@ -141,7 +141,7 @@ public boolean isRemoved(Object key)
       head = head.next;
        System.out.println("");
       System.out.println("");
-       System.out.println("Answer is: No");
+       System.out.println("Answer is: Yes");
        System.out.println("");
       System.out.println("");
       return false;
@@ -160,7 +160,7 @@ public boolean isRemoved(Object key)
    {
        System.out.println("");
       System.out.println("");
-       System.out.println("Answer is: Yes");
+       System.out.println("Answer is: No");
        System.out.println("");
       System.out.println("");
        return true;
@@ -169,7 +169,7 @@ public boolean isRemoved(Object key)
    {
        System.out.println("");
       System.out.println("");
-       System.out.println("Answer is: No");
+       System.out.println("Answer is: Yes");
        System.out.println("");
       System.out.println("");
        return false;
