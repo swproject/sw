@@ -117,6 +117,8 @@ public class LinkedListJunit {
 			
 		while(it.hasNext())
 			assertEquals("Result ", it.next(), expectedList[i++]);
+			
+		assertEquals(strlist.isRemoved("Maria"), true); 
 	}
 	
 	public void reverseStringArray(String[] strArr) {
