@@ -1,3 +1,5 @@
+package linkedList;
+
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -30,7 +32,7 @@ private class LinkedListIterator implements Iterator<Object>
    public void remove(){}
    public Object next()
 {
-   if(!hasNext()) throw new NoSuchElementException();
+   if(!hasNext()) throw new NoSuchElementException("No such element!");
    Object res = nextNode.data;
    nextNode = nextNode.next;
    return res;
@@ -99,7 +101,7 @@ public void remove(Object key)
    if( head.data.equals(key) )
    {
       head = head.next;
-      return;
+      return; 
    }
 
    Node<Object> cur  = head;
@@ -126,6 +128,7 @@ public Object getObj(Node<Object> input)
 {
     return input.data;
 }
+
 /*Lets check whether we removed the data from the list*/
 /*Input the object that you wanted to delete*/
 public boolean isRemoved(Object key)
@@ -141,7 +144,7 @@ public boolean isRemoved(Object key)
       head = head.next;
        System.out.println("");
       System.out.println("");
-       System.out.println("Answer is: Yes");
+       System.out.println("Answer is: No");
        System.out.println("");
       System.out.println("");
       return false;
@@ -160,7 +163,7 @@ public boolean isRemoved(Object key)
    {
        System.out.println("");
       System.out.println("");
-       System.out.println("Answer is: No");
+       System.out.println("Answer is: Yes");
        System.out.println("");
       System.out.println("");
        return true;
@@ -169,7 +172,7 @@ public boolean isRemoved(Object key)
    {
        System.out.println("");
       System.out.println("");
-       System.out.println("Answer is: Yes");
+       System.out.println("Answer is: No");
        System.out.println("");
       System.out.println("");
        return false;
