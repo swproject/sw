@@ -179,12 +179,12 @@ public class LinkedListJunit {
 		strlist.getHead();
 	}
 	
-	/*@Test
-	public void test_getObj(){
-		LinkedList<String> strlist = new LinkedList<String>();
-		LinkedList testGetObj =new LinkedList();
-		strlist.getObj();
-	}*/
+	@Test
+     	public void test_getObj(){
+             LinkedList<String> strlist = new LinkedList<String>();
+             strlist.addFirst("Ramon");
+             strlist.getObj(strlist.getHead());
+     	}
 	
 	public void reverseStringArray(String[] strArr) {
 
