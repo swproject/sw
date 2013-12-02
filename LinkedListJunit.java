@@ -1,196 +1,200 @@
 package linkedList;
 
-import java.io.IOException;
+import static org.junit.Assert.*;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-//TEST
-//TEST 2
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
-public class LinkedList<Object> implements Iterable<Object>{
-    private Node<Object> head;
-private static class Node<Object>
-{
-   private Object data;
-   private Node<Object> next;
+import clover.org.apache.velocity.runtime.parser.node.Node;
 
-   public Node(Object data, Node<Object> next)
-   {
-      this.data = data;
-      this.next = next;
-   }
-}
-private class LinkedListIterator implements Iterator<Object>
-{
-   private Node<Object> nextNode;
 
-   public LinkedListIterator()
-   {
-      nextNode = head;
-   }
-   public boolean hasNext() {  return nextNode != null;  }
-   public void remove(){}
-   public Object next()
-{
-   if(!hasNext()) throw new NoSuchElementException();
-   Object res = nextNode.data;
-   nextNode = nextNode.next;
-   return res;
-}
-   
-}
-public LinkedList()
-{
-    
-}
-public Iterator<Object> iterator()
-{
-   return new LinkedListIterator();
-}
-public void addFirst(Object item)
-{
-   head = new Node<Object>(item, head);
-}
 
-public void addLast(Object item)
-{
-   if(head == null) addFirst(item);
-   else
-   {
-      Node<Object> tmp = head;
-      while(tmp.next != null) tmp = tmp.next;
+public class LinkedListJunit {
 
-      tmp.next = new Node<Object>(item, null);
-   }
-}
-/*Insert toInsert object after the node that contains "key" object*/
-public void insertAfter(Object key, Object toInsert)
-{
-   Node<Object> tmp = head;
-   while(tmp != null && !tmp.data.equals(key)) tmp = tmp.next;
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+	}
 
-   if(tmp != null)
-      tmp.next = new Node<Object>(toInsert, tmp.next);
-}
-/*Insert toInsert object before the node that contains "key" object*/
-public void insertBefore(Object key, Object toInsert)
-{
-   if(head == null) return;
-   if(head.data.equals(key))
-   {
-      addFirst(toInsert);
-      return;
-   }
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+	}
 
-   Node<Object> prev = null;
-   Node<Object> cur = head;
+	@Before
+	public void setUp() throws Exception {
+	}
 
-   while(cur != null && !cur.data.equals(key))
-   {
-      prev = cur;
-      cur = cur.next;
-   }
-   //insert between cur and prev
-   if(cur != null) prev.next = new Node<Object>(toInsert, cur);
-}
-/*This function removes a datum from the list. Input a datum you like to remove*/
-public void remove(Object key)
-{
-   if(head == null) throw new RuntimeException("cannot delete");
+	@After
+	public void tearDown() throws Exception {
+	}
 
-   if( head.data.equals(key) )
-   {
-      head = head.next;
-      return; 
-   }
+	@Rule
+	public ExpectedException expectedEx = ExpectedException.none();
 
-   Node<Object> cur  = head;
-   Node<Object> prev = null;
+	@Test
+	public void test_addFirst_with_String() {
+		System.out.println("\nTesting addFirst method");
+		String[] myStringList = { "Jose", "Maria", "Pedro" };
+		LinkedList<String> strlist = new LinkedList<String>();
+		LinkedList<String> empStrlist = new LinkedList<String>();
 
-   while(cur != null && !cur.data.equals(key) )
-   {
-      prev = cur;
-      cur = cur.next;
-   }
+		for (int i = 0; i < myStringList.length; i++)
+			strlist.addFirst(myStringList[i]);
 
-   if(cur == null) throw new RuntimeException("cannot delete");
+		int i = 0;
+		Iterator<String> it = strlist.iterator();
+		Iterator<String> empIt = empStrlist.iterator(); // for NosuchElementException()
+		try {
+			empIt.remove(); //cover remove() interface
+			empIt.next();
+		}catch(final NoSuchElementException e)
+		{
+			String msg = "No such element!";
+			assertEquals(msg, e.getMessage());
+		}
+		reverseStringArray(myStringList);
 
-   //delete cur node
-   prev.next = cur.next;
-}
-/*Get head pointer from the list*/
-public Node<Object> getHead()
-{
-    return head;
-}
-/*Get the data from the object you like*/
-public Object getObj(Node<Object> input)
-{
-    return input.data;
-}
-/*Lets check whether we removed the data from the list*/
-/*Input the object that you wanted to delete*/
-public boolean isRemoved(Object key)
-{
-    if(head == null) throw new RuntimeException("everything is gone");
-     System.out.println("");
-      System.out.println("");
-    System.out.println("Is " + key.toString()+ " still in the list??? ");
-    System.out.println("");
-      System.out.println("");
-   if( head.data.equals(key) )
-   {
-      head = head.next;
-       System.out.println("");
-      System.out.println("");
-       System.out.println("Answer is: No");
-       System.out.println("");
-      System.out.println("");
-      return false;
-   }
+		while (it.hasNext())
+			assertEquals("Result ", it.next(), myStringList[i++]);
+	}
 
-   Node<Object> cur  = head;
-   Node<Object> prev = null;
+	@Test
+	public void test_addLast_with_String() {
+		System.out.println("\nTesting addLast");
+		String[] myStringList = { "Jose", "Maria", "Pedro" };
+		LinkedList<String> strlist = new LinkedList<String>();
 
-   while(cur != null && !cur.data.equals(key) )
-   {
-      prev = cur;
-      cur = cur.next;
-   }
+		for (int i = 0; i < myStringList.length; i++)
+			strlist.addLast(myStringList[i]);
 
-   if(cur == null)
-   {
-       System.out.println("");
-      System.out.println("");
-       System.out.println("Answer is: Yes");
-       System.out.println("");
-      System.out.println("");
-       return true;
-   }
-   else
-   {
-       System.out.println("");
-      System.out.println("");
-       System.out.println("Answer is: No");
-       System.out.println("");
-      System.out.println("");
-       return false;
-   }
-  }
- public static void main(String[] args) throws IOException {
-    LinkedList<Integer> ls = new LinkedList<Integer>();
-    ls.addFirst(1);
-    ls.addLast(2);
-    ls.remove(1);
-    Node h = ls.getHead();
-    boolean isRemoved = ls.isRemoved(2);
-    System.out.println("isRemoved: " + isRemoved);
-    if(ls.getObj(h) == null)
-        System.out.println("NULL!!!");
-    else
-    {
-        int ele = ls.getObj(h);
-        System.out.println("ele: " + ele);
-    }
- }
+		int i = 0;
+		Iterator<String> it = strlist.iterator();
+		while (it.hasNext())
+			assertEquals("Result ", it.next(), myStringList[i++]);
+	}
+
+	@Test
+	public void test_insertAfter_with_String() {
+		System.out.println("\nTesting insertAfter method");
+		String[] myStringList = { "Jose", "Maria", "Pedro" };
+		LinkedList<String> strlist = new LinkedList<String>();
+
+		for (int i = 0; i < myStringList.length; i++)
+			strlist.addLast(myStringList[i]);
+
+		strlist.insertAfter("Pedro", "Texas A&M");
+
+		String[] expectedList = { "Jose", "Maria", "Pedro", "Texas A&M" };
+
+		int i = 0;
+		Iterator<String> it = strlist.iterator();
+
+		while (it.hasNext())
+			assertEquals("Result ", it.next(), expectedList[i++]);
+	}
+
+	@Test
+	public void test_insertBefore_with_String() {
+		System.out.println("\nTesting insertBefore method");
+		String[] myStringList = { "Jose", "Maria", "Pedro" };
+		LinkedList<String> strlist = new LinkedList<String>();
+		strlist.insertBefore("Jose", "Jose"); // test head==null
+		
+		
+		for (int i = 0; i < myStringList.length; i++)
+			strlist.addLast(myStringList[i]);
+		strlist.insertBefore("Pedro", "Harvard");
+		strlist.insertBefore("Havard", "Pedro");
+		String[] expectedList = { "Jose", "Maria", "Harvard", "Pedro" };
+		int i = 0;
+		Iterator<String> it = strlist.iterator();
+
+		while (it.hasNext())
+			assertEquals("Result ", it.next(), expectedList[i++]);
+
+	}
+
+
+	@Test
+	public void test_removeObject_with_String() {
+
+		System.out.println("\nTesting remove Object method");
+		String[] myStringList = { "Jose", "Maria", "Pedro" };
+		LinkedList<String> strlist = new LinkedList<String>();
+		LinkedList<String> everyGoneStrList = new LinkedList<String>();
+		try {
+			strlist.remove(null);
+
+		} catch (final RuntimeException e) {
+			final String msg = "cannot delete";
+			assertEquals(msg, e.getMessage());
+		}
+		for (int i = 0; i < myStringList.length; i++)
+			strlist.addLast(myStringList[i]);
+		
+		strlist.remove("Maria");
+
+		String[] expectedList = { "Jose", "Pedro" };
+
+		int i = 0;
+		Iterator<String> it = strlist.iterator();
+		while (it.hasNext())
+			assertEquals("Result ", it.next(), expectedList[i++]);
+		
+		try {
+			strlist.remove(null);
+
+		} catch (final RuntimeException e) {
+			final String msg = "cannot delete";
+			assertEquals(msg, e.getMessage());
+		}
+		
+		
+		try {
+			assertEquals(strlist.isRemoved("Pedro"), false);
+			assertEquals(strlist.isRemoved("Maria"), true); //cru==null
+			assertEquals(strlist.isRemoved("Jose"), false);
+			
+			everyGoneStrList.addLast("Pedro");
+			everyGoneStrList.remove("Pedro");
+			everyGoneStrList.isRemoved("Pedro");
+
+		} catch (final RuntimeException e) { 
+			final String msg = "everything is gone";
+			assertEquals(msg, e.getMessage());
+		}
+
+	}
+	
+	@Test
+	public void test_getHead(){
+		LinkedList<String> strlist = new LinkedList<String>();
+		strlist.getHead();
+	}
+	
+	/*@Test
+	public void test_getObj(){
+		LinkedList<String> strlist = new LinkedList<String>();
+		LinkedList testGetObj =new LinkedList();
+		strlist.getObj();
+	}*/
+	
+	public void reverseStringArray(String[] strArr) {
+
+		String temp;
+		int len = strArr.length;
+		for (int i = 0, j = len - 1; i < len / 2; i++, j--) {
+			temp = strArr[i];
+			strArr[i] = strArr[j];
+			strArr[j] = temp;
+		}
+	}
+
 }
