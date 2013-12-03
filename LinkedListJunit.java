@@ -13,9 +13,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import clover.org.apache.velocity.runtime.parser.node.Node;
-
-
 
 public class LinkedListJunit {
 
@@ -50,12 +47,12 @@ public class LinkedListJunit {
 
 		int i = 0;
 		Iterator<String> it = strlist.iterator();
-		Iterator<String> empIt = empStrlist.iterator(); // for NosuchElementException()
+		Iterator<String> empIt = empStrlist.iterator(); // for
+														// NosuchElementException()
 		try {
-			empIt.remove(); //cover remove() interface
+			empIt.remove(); // cover remove() interface
 			empIt.next();
-		}catch(final NoSuchElementException e)
-		{
+		} catch (final NoSuchElementException e) {
 			String msg = "No such element!";
 			assertEquals(msg, e.getMessage());
 		}
@@ -106,8 +103,7 @@ public class LinkedListJunit {
 		String[] myStringList = { "Jose", "Maria", "Pedro" };
 		LinkedList<String> strlist = new LinkedList<String>();
 		strlist.insertBefore("Jose", "Jose"); // test head==null
-		
-		
+
 		for (int i = 0; i < myStringList.length; i++)
 			strlist.addLast(myStringList[i]);
 		strlist.insertBefore("Pedro", "Harvard");
@@ -120,7 +116,6 @@ public class LinkedListJunit {
 			assertEquals("Result ", it.next(), expectedList[i++]);
 
 	}
-
 
 	@Test
 	public void test_removeObject_with_String() {
@@ -138,7 +133,7 @@ public class LinkedListJunit {
 		}
 		for (int i = 0; i < myStringList.length; i++)
 			strlist.addLast(myStringList[i]);
-		
+
 		strlist.remove("Maria");
 
 		String[] expectedList = { "Jose", "Pedro" };
@@ -147,7 +142,7 @@ public class LinkedListJunit {
 		Iterator<String> it = strlist.iterator();
 		while (it.hasNext())
 			assertEquals("Result ", it.next(), expectedList[i++]);
-		
+
 		try {
 			strlist.remove(null);
 
@@ -155,37 +150,36 @@ public class LinkedListJunit {
 			final String msg = "cannot delete";
 			assertEquals(msg, e.getMessage());
 		}
-		
-		
+
 		try {
 			assertEquals(strlist.isRemoved("Pedro"), false);
-			assertEquals(strlist.isRemoved("Maria"), true); //cru==null
+			assertEquals(strlist.isRemoved("Maria"), true); // cru==null
 			assertEquals(strlist.isRemoved("Jose"), false);
-			
+
 			everyGoneStrList.addLast("Pedro");
 			everyGoneStrList.remove("Pedro");
 			everyGoneStrList.isRemoved("Pedro");
 
-		} catch (final RuntimeException e) { 
+		} catch (final RuntimeException e) {
 			final String msg = "everything is gone";
 			assertEquals(msg, e.getMessage());
 		}
 
 	}
-	
+
 	@Test
-	public void test_getHead(){
+	public void test_getHead() {
 		LinkedList<String> strlist = new LinkedList<String>();
 		strlist.getHead();
 	}
-	
+
 	@Test
-     	public void test_getObj(){
-             LinkedList<String> strlist = new LinkedList<String>();
-             strlist.addFirst("Ramon");
-             strlist.getObj(strlist.getHead());
-     	}
-	
+	public void test_getObj() {
+		LinkedList<String> strlist = new LinkedList<String>();
+		strlist.addFirst("Ramon");
+		strlist.getObj(strlist.getHead());
+	}
+
 	public void reverseStringArray(String[] strArr) {
 
 		String temp;
