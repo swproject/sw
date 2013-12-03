@@ -41,8 +41,6 @@ public class InsertionAndQuickAndBubbleSortingTest {
     System.out.println("* UtilsJUnit3Test: test method 2 - testWithTimeout()");
    
       int[] temp = new int[5000000];
-     Random rnd = new Random();
-      rnd.setSeed(1000);
       int size = 5000000-1;
       for(int x = 0; x < 5000000; x++)
       {
